@@ -25,4 +25,6 @@ urlpatterns = [
     path('task_list', views.task_list),
     path('add_task', views.add_task),
     path('send_task', views.send_task),
+    path('solve_task', views.solve_task),
+    path('send_answer', views.send_answer),
 ]

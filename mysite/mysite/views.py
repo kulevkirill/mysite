@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.core.cache import cache
 
+import random
+
 from . import tasks_utils
 
 def index(request):
@@ -35,3 +37,22 @@ def send_task(request):
         return render(request, "task_request.html", context)
     else:
         add_task(request)
+
+def solve_task(request):
+    tasks = tasks_utils.get_tasks()
+    task = tasks[random.randint(0, len(tasks)-1)]
+    return render(request, "solve_task.html", context={"task": task[1], "answer": task[2]})
+
+def send_answer(request):
+    if request.method == "POST":
+        cache.clear()
+        answer = request.POST.get("answer", "")
+        real_answer = request.POST.get("real_answer", "")
+        context = {"answer": answer, "real_answer": real_answer}
+
+        if answer == real_answer:
+            context["success"] = True
+            return render(request, "solved_task.html", context)
+
+        context["success"] = False
+        return render(request, "solved_task.html", context)
