@@ -1,14 +1,20 @@
-{% extends "solve_task.html" %}
+{% extends "base_page.html" %}
 
 {% block content %}
 <div class="container px-4 py-5">
     <div class="bg-body-tertiary p-5 rounded">
         <h2>Задача решена <span class="fw-bold">{% if success %}верно{% else %}не верно{% endif %}</span>.</h2>
 
-        <h2>Ваш ответ: {{answer}}</h2>
-        <h2>Правильный ответ: {{real_answer}}</h2>
+        <h2>Ваш ответ: {{answer}}.</h2>
+        <h2>Правильный ответ: {{real_answer}}.</h2>
     </div>
 </div>
 
+<a href="/solve_task">
+    <button type="button" class="btn btn-primary btn-lg px-4 gap-3"> ПРОДОЛЖИТЬ РЕШАТЬ </button>
+</a>
+<a href="/">
+    <button type="button" class="btn btn-outline-secondary btn-lg px-4"> ВЕРНУТЬСЯ НА ГЛАВНУЮ </button>
+</a>
 
 {% endblock %}
